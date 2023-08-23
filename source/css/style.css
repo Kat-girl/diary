@@ -44,6 +44,11 @@
   flex-direction: column;
 }
 
+.body__emoji {
+  display: block;
+  margin: auto;
+}
+
 .header {
   background-color: #283645;
   color: #ffffff;
