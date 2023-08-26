@@ -59,6 +59,10 @@
   }
 }
 
+.evaluation__payment-container {
+  display: flex;
+}
+
 .evaluation__payment {
   margin: 0;
   margin-bottom: 20px;
@@ -69,7 +73,22 @@
 }
 
 .evaluation__payment-mark {
+  margin: 0;
   margin-left: 10px;
+}
+
+.evaluation__payment-mark--yes {
+  display: block;
+  width: 30px;
+  height: 20px;
+  background: url("../../img/yes.svg") no-repeat center center;
+}
+
+.evaluation__payment-mark--no {
+  display: block;
+  width: 30px;
+  height: 20px;
+  background: url("../../img/no.svg") no-repeat center center;
 }
 
 .evaluation__type {
