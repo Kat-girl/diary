@@ -25,6 +25,8 @@
 }
 
 .evaluation__item {
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 5px 5px 0 rgba(0, 1, 1, 0.15);
   padding: 20px;
 }
@@ -83,6 +85,7 @@
   @include list-style-clear;
   padding-left: 10px;
   padding-right: 10px;
+  flex-grow: 1;
 }
 
 .evaluation__type-item {
