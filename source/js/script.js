@@ -1,48 +1,26 @@
 let classCards = [
   {
+    date: 'August 23, 2023',
+    isPaid: true,
+    tasks: [
+      {
+        task: 'Повторение новых слов (p.49, ex.4)',
+        score: 5
+      },
+      {
+        task: 'Изучение нового материала I like - he likes',
+        score: '+'
+      },
+      {
+        task: 'Просмотр мультфильма',
+        score: '+'
+      }
+    ],
+    behaviour: '5',
+  },
+  {
     date: 'August 25, 2023',
-    datetime: '2023-08-25',
     isPaid: false,
-    tasks: [
-      {
-        task: 'Повторение новых слов (p.49, ex.4)',
-        score: 5
-      },
-      {
-        task: 'Перевод словосочетаний типа: 10 ручек, 7 карандашей и т.п.',
-        score: 4
-      },
-      {
-        task: 'Просмотр обучающего видео с последующим разбором',
-        score: '+'
-      }
-    ],
-    behaviour: '5-',
-  },
-
-  {
-    date: 'August 23, 2023',
-    isPaid: true,
-    tasks: [
-      {
-        task: 'Повторение новых слов (p.49, ex.4)',
-        score: 5
-      },
-      {
-        task: 'Перевод словосочетаний типа: 10 ручек, 7 карандашей и т.п.',
-        score: 4
-      },
-      {
-        task: 'Просмотр обучающего видео с последующим разбором',
-        score: '+'
-      }
-    ],
-    behaviour: '5-',
-  },
-
-  {
-    date: 'August 23, 2023',
-    isPaid: true,
     tasks: [
       {
         task: 'Повторение новых слов (p.49, ex.4)',
@@ -79,7 +57,7 @@ let createCard = (card) => {
   let evaluationHeader = createElement ('div', 'evaluation__header');
   evaluationItem.appendChild(evaluationHeader);
 
-  let evaluationDate = createElement ('time', 'evaluation__date', classCards[0].date);
+  let evaluationDate = createElement ('time', 'evaluation__date', card.date);
   evaluationHeader.appendChild(evaluationDate);
 
   let evaluationPaymentContainer = createElement ('div', 'evaluation__payment-container');
@@ -90,7 +68,7 @@ let createCard = (card) => {
 
   let evaluationPaymentMark = createElement ('p', 'evaluation__payment-mark');
   let payment = 'evaluation__payment-mark--yes';
-  if (!classCards[0].isPaid) {
+  if (!card.isPaid) {
     payment = 'evaluation__payment-mark--no';
   }
   evaluationPaymentMark.classList.add(payment);
@@ -102,17 +80,19 @@ let createCard = (card) => {
   let evaluationTypeList = createElement ('ul', 'evaluation__type-list');
   evaluationItem.appendChild(evaluationTypeList);
 
-  let evaluationTypeItem = createElement ('li', 'evaluation__type-item');
-  evaluationTypeList.appendChild(evaluationTypeItem);
+  for (let i = 0; i < card.tasks.length; i ++) {
+    let evaluationTypeItem = createElement ('li', 'evaluation__type-item');
+    evaluationTypeList.appendChild(evaluationTypeItem);
 
-  let evaluationTask = createElement ('span', 'evaluation__task', classCards[0].tasks[0].task);
-  evaluationTypeItem.appendChild(evaluationTask);
+    let evaluationTask = createElement ('span', 'evaluation__task', card.tasks[i].task);
+    evaluationTypeItem.appendChild(evaluationTask);
 
-  let evaluationDots = createElement ('span', 'evaluation__dots');
-  evaluationTypeItem.appendChild(evaluationDots);
+    let evaluationDots = createElement ('span', 'evaluation__dots');
+    evaluationTypeItem.appendChild(evaluationDots);
 
-  let evaluationScore = createElement ('span', 'evaluation__score', classCards[0].tasks[0].score);
-  evaluationTypeItem.appendChild(evaluationScore);
+    let evaluationScore = createElement ('span', 'evaluation__score', card.tasks[i].score);
+    evaluationTypeItem.appendChild(evaluationScore);
+  }
 
   let evaluationBehaviourContainer = createElement ('div', 'evaluation__behaviour-container');
   evaluationItem.appendChild(evaluationBehaviourContainer);
@@ -121,7 +101,7 @@ let createCard = (card) => {
   evaluationTypeBehaviour.classList.add('evaluation__type-behaviour');
   evaluationBehaviourContainer.appendChild(evaluationTypeBehaviour);
 
-  let evaluationBehaviourScore = createElement ('span', 'evaluation__score', classCards[0].behaviour);
+  let evaluationBehaviourScore = createElement ('span', 'evaluation__score', card.behaviour);
   evaluationBehaviourContainer.appendChild(evaluationBehaviourScore);
 
   return evaluationItem;
