@@ -20,7 +20,7 @@ let classCards = [
   },
   {
     date: 'August 25, 2023',
-    isPaid: false,
+    isPaid: true,
     tasks: [
       {
         task: 'Повторение новых слов (p.49, ex.4)',
@@ -36,6 +36,40 @@ let classCards = [
       }
     ],
     behaviour: '5-',
+  },
+  {
+    date: 'August 30, 2023',
+    isPaid: true,
+    tasks: [
+      {
+        task: 'Повторение правила "I like - He likes"',
+        score: '+'
+      },
+      {
+        task: 'Чтение, перевод фраз и предложений',
+        score: 4
+      }
+    ],
+    behaviour: '5-',
+  },
+  {
+    date: 'September, 1, 2023',
+    isPaid: true,
+    tasks: [
+      {
+        task: 'Повторение правила "I like - He likes"',
+        score: '+'
+      },
+      {
+        task: 'Ex. 5, p.50 - переделать предложения',
+        score: 5
+      },
+      {
+        task: 'Просмотр обучающего видео с последующим разбором',
+        score: '+'
+      }
+    ],
+    behaviour: '5',
   }
 ]
 
