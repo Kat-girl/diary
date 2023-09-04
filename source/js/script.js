@@ -1,5 +1,51 @@
 let classCards = [
   {
+    date: 'August 16, 2023',
+    isPaid: true,
+    tasks: [
+      {
+        task: 'Чтение слов',
+        score: 5
+      },
+      {
+        task: 'Поиск транскрипции',
+        score: 5
+      },
+      {
+        task: 'Написание слов',
+        score: 5
+      },
+      {
+        task: 'Перевод слов с английского на русский',
+        score: 4
+      },
+      {
+        task: 'Чтение и перевод текста ex.2 p.47',
+        score: 4
+      }
+    ],
+    behaviour: 5
+  },
+  {
+    date: 'August 18, 2023',
+    isPaid: true,
+    tasks: [
+      {
+        task: 'Чтение новых слов',
+        score: 5
+      },
+      {
+        task: 'Найти рифму к словам',
+        score: 5
+      },
+      {
+        task: 'Просмотр мультфильма',
+        score: '+'
+      }
+    ],
+    behaviour: '5',
+  },
+  {
     date: 'August 23, 2023',
     isPaid: true,
     tasks: [
@@ -53,7 +99,7 @@ let classCards = [
     behaviour: '5-',
   },
   {
-    date: 'September, 1, 2023',
+    date: 'September 1, 2023',
     isPaid: true,
     tasks: [
       {
@@ -71,86 +117,50 @@ let classCards = [
     ],
     behaviour: '5',
   }
-]
+];
 
-let createElement = (tagName, className, text) => {
-  let element = document.createElement(tagName);
-  element.classList.add(className);
-  if (text) {
-    element.textContent = text;
-  }
-  return element;
+let getNewEvaluationTypeItem = (data) => {
+  let newEvaluationTypeItem = document.querySelector('#evaluation-type-item').content.querySelector('.evaluation__type-item').cloneNode(true);
+  newEvaluationTypeItem.querySelector('.evaluation__task').textContent = data.task;
+  newEvaluationTypeItem.querySelector('.evaluation__score').textContent = data.score;
+
+  return newEvaluationTypeItem;
 };
 
-let createCard = (card) => {
-  let evaluationItem = createElement ('li', 'evaluation__item');
+let addEvaluationTypeItem = (array) => {
+  let fragment = document.createDocumentFragment();
+  array.forEach((data) => {
+    fragment.append(getNewEvaluationTypeItem(data));
+  });
+  return fragment;
+};
 
-  let evaluationTitle = createElement ('h2', 'visually-hidden', 'Оценка работы');
-  evaluationItem.appendChild(evaluationTitle);
+let getNewItem = (data) => {
+  let newItem = document.querySelector('#evaluation-item').content.querySelector('.evaluation__item').cloneNode(true);
+  newItem.querySelector('.evaluation__date').textContent = data.date;
 
-  let evaluationHeader = createElement ('div', 'evaluation__header');
-  evaluationItem.appendChild(evaluationHeader);
-
-  let evaluationDate = createElement ('time', 'evaluation__date', card.date);
-  evaluationHeader.appendChild(evaluationDate);
-
-  let evaluationPaymentContainer = createElement ('div', 'evaluation__payment-container');
-  evaluationHeader.appendChild(evaluationPaymentContainer);
-
-  let evaluationPayment = createElement ('p', 'evaluation__payment', 'Оплата:');
-  evaluationPaymentContainer.appendChild(evaluationPayment);
-
-  let evaluationPaymentMark = createElement ('p', 'evaluation__payment-mark');
   let payment = 'evaluation__payment-mark--yes';
-  if (!card.isPaid) {
+  if (!data.isPaid) {
     payment = 'evaluation__payment-mark--no';
   }
-  evaluationPaymentMark.classList.add(payment);
-  evaluationPaymentContainer.appendChild(evaluationPaymentMark);
+  newItem.querySelector('.evaluation__payment-mark').classList.add(payment);
 
-  let evaluationType = createElement ('p', 'evaluation__type', 'Выполнение заданий');
-  evaluationItem.appendChild(evaluationType);
+  newItem.querySelector('.evaluation__score').textContent = data.behaviour;
 
-  let evaluationTypeList = createElement ('ul', 'evaluation__type-list');
-  evaluationItem.appendChild(evaluationTypeList);
+  newItem.querySelector('.evaluation__type-list').append(addEvaluationTypeItem(data.tasks));
 
-  for (let i = 0; i < card.tasks.length; i ++) {
-    let evaluationTypeItem = createElement ('li', 'evaluation__type-item');
-    evaluationTypeList.appendChild(evaluationTypeItem);
-
-    let evaluationTask = createElement ('span', 'evaluation__task', card.tasks[i].task);
-    evaluationTypeItem.appendChild(evaluationTask);
-
-    let evaluationDots = createElement ('span', 'evaluation__dots');
-    evaluationTypeItem.appendChild(evaluationDots);
-
-    let evaluationScore = createElement ('span', 'evaluation__score', card.tasks[i].score);
-    evaluationTypeItem.appendChild(evaluationScore);
-  }
-
-  let evaluationBehaviourContainer = createElement ('div', 'evaluation__behaviour-container');
-  evaluationItem.appendChild(evaluationBehaviourContainer);
-
-  let evaluationTypeBehaviour = createElement ('p', 'evaluation__type', 'Поведение на занятии');
-  evaluationTypeBehaviour.classList.add('evaluation__type-behaviour');
-  evaluationBehaviourContainer.appendChild(evaluationTypeBehaviour);
-
-  let evaluationBehaviourScore = createElement ('span', 'evaluation__score', card.behaviour);
-  evaluationBehaviourContainer.appendChild(evaluationBehaviourScore);
-
-  return evaluationItem;
+  return newItem;
 };
 
-let createCardsList = (cards) => {
-  let evaluationList = document.querySelector('.evaluation__list');
-  for (let i = 0; i < cards.length; i ++) {
-    let classCard = cards[i];
-    let cardsListItem = createCard (classCard);
-    evaluationList.prepend(cardsListItem);
-  }
+let addItem = (array) => {
+  let fragment = document.createDocumentFragment();
+  array.forEach((data) => {
+    fragment.prepend(getNewItem(data));
+  });
+  document.querySelector('.evaluation__list').prepend(fragment);
 };
 
-createCardsList (classCards);
+addItem (classCards);
 
 let firstLi = document.querySelector('.evaluation__item:first-child');
 firstLi.classList.add('evaluation__item--latest');
