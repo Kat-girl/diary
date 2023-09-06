@@ -116,6 +116,22 @@ let classCards = [
       }
     ],
     behaviour: '5',
+  },
+  {
+    date: 'September 6, 2023',
+    isPaid: false,
+    tasks: [
+      {
+        task: 'Просмотр обучающего видео с последующим разбором',
+        score: '+'
+      },
+      {
+        task: 'Повторение слов и фраз, изученных ранее',
+        score: 5
+      },
+
+    ],
+    behaviour: 5,
   }
 ];
 
