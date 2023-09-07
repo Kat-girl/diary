@@ -119,7 +119,7 @@ let classCards = [
   },
   {
     date: 'September 6, 2023',
-    isPaid: false,
+    isPaid: true,
     tasks: [
       {
         task: 'Просмотр обучающего видео с последующим разбором',
